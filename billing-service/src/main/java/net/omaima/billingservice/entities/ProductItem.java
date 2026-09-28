@@ -15,7 +15,7 @@ public class ProductItem {
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Bill bill;
     private int quantity;
-    private double unitPrice;
+    private double Price;
     @Transient
     private Product product;
 }
