@@ -10,12 +10,12 @@ public class ProductItem {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String productId;
+    private Long productId;
     @ManyToOne
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Bill bill;
     private int quantity;
-    private double Price;
+    private double price;
     @Transient
     private Product product;
 }

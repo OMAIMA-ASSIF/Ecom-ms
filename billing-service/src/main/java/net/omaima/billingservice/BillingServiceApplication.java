@@ -35,6 +35,7 @@ public class BillingServiceApplication {
                 billRepository.save(bill);
                 productIds.forEach(productId->{
                     ProductItem productItem = new ProductItem();
+                    productItem.setProductId(productId);
                     productItem.setPrice(1000*Math.random()*600);
                     productItem.setQuantity(1+ new Random().nextInt(20));
                     productItem.setBill(bill);

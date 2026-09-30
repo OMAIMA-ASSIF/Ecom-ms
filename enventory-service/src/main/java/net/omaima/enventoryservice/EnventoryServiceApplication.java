@@ -5,6 +5,7 @@ import net.omaima.enventoryservice.repository.ProductRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
 
 @SpringBootApplication
 public class EnventoryServiceApplication {
@@ -13,6 +14,7 @@ public class EnventoryServiceApplication {
         SpringApplication.run(EnventoryServiceApplication.class, args);
     }
 
+    @Bean
     CommandLineRunner start(ProductRepository productRepository){
         return args -> {
             productRepository.save(Product.builder()
@@ -26,6 +28,13 @@ public class EnventoryServiceApplication {
                     .price(34000)
                     .quantity(12)
                     .build());
+
+            productRepository.save(Product.builder()
+                    .name("Phone")
+                    .price(5000)
+                    .quantity(8)
+                    .build());
+
         };
     }
 
