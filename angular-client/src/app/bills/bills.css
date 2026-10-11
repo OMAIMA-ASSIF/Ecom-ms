@@ -1,0 +1,221 @@
+.bill-lookup {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 28px;
+  padding: 22px;
+}
+
+.lookup-copy {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+}
+
+.lookup-copy .feedback-icon {
+  flex: 0 0 auto;
+  margin: 0;
+}
+
+.lookup-form {
+  width: min(100%, 430px);
+}
+
+.lookup-form label {
+  display: block;
+  margin-bottom: 7px;
+  color: #5e697b;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.lookup-controls {
+  display: flex;
+  gap: 8px;
+}
+
+.lookup-controls input {
+  width: 150px;
+  min-width: 0;
+  padding: 0 11px;
+  border: 1px solid #e2e7ef;
+  border-radius: 7px;
+  outline: 0;
+  color: #263146;
+  background: #fff;
+  font-size: 12px;
+}
+
+.lookup-controls input:focus {
+  border-color: #8a97ef;
+  box-shadow: 0 0 0 3px rgb(101 117 220 / 10%);
+}
+
+.primary-button {
+  min-height: 38px;
+  padding: 0 13px;
+  border: 0;
+  border-radius: 7px;
+  color: #fff;
+  background: #5869dc;
+  font-size: 11px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.primary-button:hover {
+  background: #4758ca;
+}
+
+.bill-feedback {
+  min-height: 150px;
+  margin-top: 20px;
+}
+
+.bill-details {
+  margin-top: 26px;
+}
+
+.bill-summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  margin-bottom: 16px;
+}
+
+.bill-summary h2 {
+  margin: 5px 0 0;
+  color: #222d41;
+  font-family: 'Manrope', sans-serif;
+  font-size: 20px;
+  letter-spacing: -0.5px;
+}
+
+.bill-summary h2 span {
+  color: #6575dc;
+}
+
+.bill-date {
+  display: grid;
+  gap: 4px;
+  text-align: right;
+}
+
+.bill-date span,
+.info-label {
+  color: #8a94a5;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.8px;
+}
+
+.bill-date strong {
+  color: #3b4659;
+  font-size: 12px;
+}
+
+.bill-info-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  margin-bottom: 16px;
+}
+
+.info-card {
+  min-height: 112px;
+  padding: 18px 20px;
+}
+
+.info-label {
+  margin: 0 0 10px;
+}
+
+.info-card h3 {
+  margin: 0 0 4px;
+  color: #303b4f;
+  font-size: 14px;
+}
+
+.info-card > p:last-child {
+  margin: 0;
+  color: #8993a4;
+  font-size: 11px;
+}
+
+.total-card strong {
+  display: block;
+  margin: 0 0 4px;
+  color: #263146;
+  font-family: 'Manrope', sans-serif;
+  font-size: 22px;
+}
+
+.total-card strong span {
+  color: #6575dc;
+  font-size: 13px;
+}
+
+.items-card .card-toolbar {
+  min-height: 68px;
+}
+
+.data-table tfoot th {
+  padding: 14px 22px;
+  border-top: 1px solid #e9edf4;
+  color: #303b4f;
+  background: #fafbfc;
+  font-size: 12px;
+  text-align: right;
+}
+
+.data-table tfoot th:first-child {
+  text-align: left;
+}
+
+.empty-items {
+  padding: 24px !important;
+  color: #8993a4 !important;
+  text-align: center;
+}
+
+@media (max-width: 760px) {
+  .bill-lookup {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 20px;
+    padding: 18px;
+  }
+
+  .lookup-form {
+    width: 100%;
+  }
+
+  .lookup-controls input {
+    flex: 1;
+  }
+}
+
+@media (max-width: 520px) {
+  .bill-info-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .bill-summary {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .bill-date {
+    text-align: left;
+  }
+
+  .lookup-controls {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .lookup-controls input {
+    min-height: 38px;
+  }
+}

@@ -1,0 +1,91 @@
+<section>
+  <header class="page-heading">
+    <div>
+      <p class="eyebrow">CATALOGUE</p>
+      <h1>Produits</h1>
+      <p>Consultez votre catalogue et surveillez les quantités disponibles.</p>
+    </div>
+    @if (!isLoading && !errorMessage) {
+      <span class="result-count">{{ products.length }} produit{{ products.length > 1 ? 's' : '' }}</span>
+    }
+  </header>
+
+  <section class="data-card" aria-label="Inventaire des produits">
+    <div class="card-toolbar">
+      <div>
+        <h2 class="card-title">Inventaire</h2>
+        <p class="card-subtitle">{{ totalUnits }} unité{{ totalUnits > 1 ? 's' : '' }} en stock au total</p>
+      </div>
+      <label class="search-field">
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <circle cx="10.8" cy="10.8" r="6.8" stroke="currentColor" stroke-width="1.7" />
+          <path d="m16 16 4.5 4.5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" />
+        </svg>
+        <input type="search" placeholder="Rechercher un produit..." aria-label="Rechercher un produit"
+               [value]="searchTerm" (input)="updateSearch($event)" />
+      </label>
+    </div>
+
+    @if (isLoading) {
+      <div class="feedback-panel" role="status">
+        <span class="loading-indicator" aria-hidden="true"></span>
+        <p>Chargement des produits...</p>
+      </div>
+    } @else if (errorMessage) {
+      <div class="feedback-panel" role="alert">
+        <span class="feedback-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none">
+            <path d="M12 8v5m0 3.5v.01M10.3 3.9 2.8 17a2 2 0 0 0 1.7 3h15a2 2 0 0 0 1.7-3l-7.5-13.1a2 2 0 0 0-3.4 0Z" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" />
+          </svg>
+        </span>
+        <h3>Chargement impossible</h3>
+        <p>{{ errorMessage }}</p>
+        <button class="text-button" type="button" (click)="loadProducts()">Réessayer</button>
+      </div>
+    } @else if (products.length === 0) {
+      <div class="feedback-panel">
+        <h3>Aucun produit pour le moment</h3>
+        <p>Les articles de votre catalogue apparaîtront ici.</p>
+      </div>
+    } @else if (filteredProducts.length === 0) {
+      <div class="feedback-panel">
+        <h3>Aucun résultat</h3>
+        <p>Aucun produit ne correspond à « {{ searchTerm }} ».</p>
+      </div>
+    } @else {
+      <div class="table-scroll">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th scope="col">Produit</th>
+              <th scope="col">Prix unitaire</th>
+              <th scope="col">Quantité</th>
+              <th scope="col">Disponibilité</th>
+              <th scope="col">Identifiant</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (product of filteredProducts; track product.id) {
+              <tr>
+                <td>
+                  <div class="identity-cell">
+                    <span class="initial-avatar product-avatar">{{ product.name.charAt(0).toUpperCase() }}</span>
+                    <span class="primary-cell">{{ product.name }}</span>
+                  </div>
+                </td>
+                <td class="primary-cell">{{ product.price | number:'1.2-2' }} MAD</td>
+                <td>{{ product.quantity }}</td>
+                <td>
+                  <span class="state-pill" [class.warning]="product.quantity < 6">
+                    {{ product.quantity === 0 ? 'Rupture' : product.quantity < 6 ? 'Stock faible' : 'En stock' }}
+                  </span>
+                </td>
+                <td class="id-cell">#{{ product.id }}</td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+    }
+  </section>
+</section>

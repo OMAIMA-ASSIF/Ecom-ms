@@ -1,0 +1,78 @@
+<div class="app-shell">
+  @if (menuOpen) {
+    <button class="sidebar-backdrop" type="button" aria-label="Fermer le menu" (click)="closeMenu()"></button>
+  }
+
+  <aside class="sidebar" [class.sidebar-open]="menuOpen">
+    <a class="brand" routerLink="/customers" (click)="closeMenu()">
+      <span class="brand-mark" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none">
+          <path d="M4 7.5 12 3l8 4.5v9L12 21l-8-4.5v-9Z" stroke="currentColor" stroke-width="1.7" />
+          <path d="m4.4 7.7 7.6 4.4 7.6-4.4M12 12.2V21" stroke="currentColor" stroke-width="1.7" />
+        </svg>
+      </span>
+      <span class="brand-copy">
+        <strong>Commerce</strong>
+        <span>ESPACE DE GESTION</span>
+      </span>
+    </a>
+
+    <div class="workspace-label">MENU PRINCIPAL</div>
+    <nav class="main-navigation" aria-label="Navigation principale">
+      <a routerLink="/customers" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }"
+         class="nav-link" (click)="closeMenu()">
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M16 20v-1.5a4 4 0 0 0-4-4H7a4 4 0 0 0-4 4V20m6.5-9a4 4 0 1 0 0-8 4 4 0 0 0 0 8Zm7-7.5a4 4 0 0 1 0 7.75m5.5 8.75v-1.5a4 4 0 0 0-3-3.87" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" />
+        </svg>
+        <span>Clients</span>
+      </a>
+      <a routerLink="/products" routerLinkActive="active" class="nav-link" (click)="closeMenu()">
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="m3 7 9-4 9 4v10l-9 4-9-4V7Z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" />
+          <path d="m3.5 7.2 8.5 4 8.5-4M12 11.5V21" stroke="currentColor" stroke-width="1.7" />
+        </svg>
+        <span>Produits</span>
+      </a>
+      <a routerLink="/bills" routerLinkActive="active" class="nav-link" (click)="closeMenu()">
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M6 3.5h12v17l-3-1.8-3 1.8-3-1.8-3 1.8v-17Z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" />
+          <path d="M9 8h6m-6 4h6m-6 4h3" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" />
+        </svg>
+        <span>Factures</span>
+      </a>
+    </nav>
+
+    <div class="sidebar-bottom">
+      <span class="connection-dot"></span>
+      <span>Passerelle API</span>
+    </div>
+  </aside>
+
+  <div class="main-column">
+    <header class="topbar">
+      <button class="menu-toggle" type="button" aria-label="Ouvrir le menu"
+              [attr.aria-expanded]="menuOpen" (click)="toggleMenu()">
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M4 6h16M4 12h16M4 18h16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
+        </svg>
+      </button>
+      <div class="topbar-context">
+        <span class="topbar-kicker">TABLEAU DE BORD</span>
+        <span class="topbar-caption">Gestion commerciale</span>
+      </div>
+      <div class="profile-chip" aria-label="Espace administrateur">
+        <span class="profile-avatar">EC</span>
+        <span class="profile-name">Espace admin</span>
+      </div>
+    </header>
+
+    <main class="page-content">
+      <router-outlet />
+    </main>
+
+    <footer class="app-footer">
+      <span>Commerce · Gestion e-commerce</span>
+      <span>Application de gestion</span>
+    </footer>
+  </div>
+</div>

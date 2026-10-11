@@ -1,0 +1,118 @@
+<section>
+  <header class="page-heading">
+    <div>
+      <p class="eyebrow">VENTES</p>
+      <h1>Factures</h1>
+      <p>Consultez le détail d’une facture à partir de son numéro.</p>
+    </div>
+  </header>
+
+  <section class="data-card bill-lookup" aria-label="Rechercher une facture">
+    <div class="lookup-copy">
+      <span class="feedback-icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none">
+          <path d="M6 3.5h12v17l-3-1.8-3 1.8-3-1.8-3 1.8v-17Z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" />
+          <path d="M9 8h6m-6 4h6m-6 4h3" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" />
+        </svg>
+      </span>
+      <div>
+        <h2 class="card-title">Rechercher une facture</h2>
+        <p class="card-subtitle">Saisissez le numéro de la facture à afficher.</p>
+      </div>
+    </div>
+    <form class="lookup-form" (ngSubmit)="findBill()">
+      <label for="bill-id">Numéro de facture</label>
+      <div class="lookup-controls">
+        <input id="bill-id" name="billId" type="number" min="1" step="1" required
+               placeholder="Ex. 1001" [(ngModel)]="billId" />
+        <button class="primary-button" type="submit">Afficher la facture</button>
+      </div>
+    </form>
+  </section>
+
+  @if (isLoading) {
+    <div class="data-card feedback-panel bill-feedback" role="status">
+      <span class="loading-indicator" aria-hidden="true"></span>
+      <p>Chargement de la facture...</p>
+    </div>
+  } @else if (errorMessage) {
+    <div class="data-card feedback-panel bill-feedback" role="alert">
+      <h3>Facture indisponible</h3>
+      <p>{{ errorMessage }}</p>
+    </div>
+  } @else if (bill) {
+    <section class="bill-details">
+      <div class="bill-summary">
+        <div>
+          <p class="eyebrow">DÉTAIL DE FACTURE</p>
+          <h2>Facture <span>#{{ bill.id }}</span></h2>
+        </div>
+        <div class="bill-date">
+          <span>Date d’émission</span>
+          <strong>{{ bill.billingDate | date:'mediumDate' }}</strong>
+        </div>
+      </div>
+
+      <div class="bill-info-grid">
+        <article class="data-card info-card">
+          <p class="info-label">CLIENT</p>
+          @if (bill.customer) {
+            <h3>{{ bill.customer.name }}</h3>
+            <p>{{ bill.customer.email }}</p>
+          } @else {
+            <h3>Client #{{ bill.customerId }}</h3>
+            <p>Coordonnées indisponibles</p>
+          }
+        </article>
+        <article class="data-card info-card total-card">
+          <p class="info-label">MONTANT TOTAL</p>
+          <strong>{{ billTotal | number:'1.2-2' }} <span>MAD</span></strong>
+          <p>{{ bill.productItems.length }} article{{ bill.productItems.length > 1 ? 's' : '' }}</p>
+        </article>
+      </div>
+
+      <section class="data-card items-card" aria-label="Articles de la facture">
+        <div class="card-toolbar">
+          <div>
+            <h2 class="card-title">Articles facturés</h2>
+            <p class="card-subtitle">Détail des produits de cette facture</p>
+          </div>
+        </div>
+        <div class="table-scroll">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th scope="col">Produit</th>
+                <th scope="col">Prix unitaire</th>
+                <th scope="col">Quantité</th>
+                <th scope="col">Total</th>
+              </tr>
+            </thead>
+            <tbody>
+              @for (item of bill.productItems; track item.id) {
+                <tr>
+                  <td class="primary-cell">{{ item.product?.name ?? 'Produit #' + item.productId }}</td>
+                  <td>{{ item.price | number:'1.2-2' }} MAD</td>
+                  <td>{{ item.quantity }}</td>
+                  <td class="primary-cell">{{ item.quantity * item.price | number:'1.2-2' }} MAD</td>
+                </tr>
+              } @empty {
+                <tr>
+                  <td colspan="4" class="empty-items">Aucun article sur cette facture.</td>
+                </tr>
+              }
+            </tbody>
+            @if (bill.productItems.length > 0) {
+              <tfoot>
+                <tr>
+                  <th colspan="3">Total</th>
+                  <th>{{ billTotal | number:'1.2-2' }} MAD</th>
+                </tr>
+              </tfoot>
+            }
+          </table>
+        </div>
+      </section>
+    </section>
+  }
+</section>
