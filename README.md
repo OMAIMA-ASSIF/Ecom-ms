@@ -10,3 +10,8 @@
 ![testconfig.PNG](images/testconfig.PNG)
 ![actuator-requete.PNG](images/actuator-requete.PNG)
 ![llllllllllllll.PNG](images/llllllllllllll.PNG)
+![Capture1.PNG](images/Capture1.PNG)
+![Capture2.PNG](images/Capture2.PNG)
+![Capture3.PNG](images/Capture3.PNG)
+![Capture4.PNG](images/Capture4.PNG)
+![Capture5.PNG](images/Capture5.PNG)
